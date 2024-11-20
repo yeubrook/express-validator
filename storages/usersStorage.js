@@ -27,6 +27,14 @@ class UsersStorage {
     deleteUser(id) {
       delete this.storage[id];
     }
+
+    searchUsers(query) {
+        const lowerCaseQuery = query.toLowerCase();
+        return this.getUsers().filter(
+          user =>
+            user.firstName.toLowerCase().includes(lowerCaseQuery)
+        );
+      }
   }
 
   module.exports = new UsersStorage();

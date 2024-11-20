@@ -17,6 +17,7 @@ exports.usersListGet = (req, res) => {
   res.render("index", {
     title: "User list",
     users: usersStorage.getUsers(),
+    searched: {}
   });
 };
 
@@ -72,3 +73,13 @@ exports.usersDeletePost = (req, res) => {
   usersStorage.deleteUser(req.params.id);
   res.redirect("/");
 };
+
+exports.usersSearchGet = (req, res) => {
+  const firstName = req.query.firstName;
+  const result = usersStorage.searchUsers(firstName);
+  res.render("index", {
+    title: "User list",
+    users: usersStorage.getUsers(),
+    searched: result
+  });
+}
